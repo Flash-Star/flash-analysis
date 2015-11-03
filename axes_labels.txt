@@ -1,0 +1,31 @@
+#  key : label : title
+time : Time (s) : Time
+mass : Mass ($\mathrm{M_\odot}$) : Mass
+x-momentum : Polar Radial Momentum ($\mathrm{g \\cdot cm/s}$) : Polar Radial Momentum
+y-momentum : Cylindrical Axial Momentum ($\mathrm{g \\cdot cm/s}$) : Cylindrical Axial Momentum
+z-momentum : z-momentum : z-momentum 
+E_internal+kinetic : Internal \& Kinetic Energy (erg) : Internal \& Kinetic Energy
+E_kinetic (from vel) : Kinetic Energy (erg) : Kinetic Energy
+E_internal : Internal Energy (erg) : Internal Energy  
+E_binding : Binding Energy (erg) : Binding Energy
+E_grav : Gravitational Potential Energy (erg) : Gravitational Potential Energy
+E_nuc : Nuclear Energy (erg) : Nuclear Energy
+E_neutloss : Neutrino Energy Loss (erg) : Neutrino Energy Loss
+mass burned : Mass Burned ($\mathrm{M_\odot}$) : Mass Burned
+mass burned to NSQE : Mass Burned To NSQE ($\mathrm{M_\odot}$) : Mass Burned To NSQE
+mass burned to NSE : Mass Burned To NSE ($\mathrm{M_\odot}$) : Mass Burned To NSE
+mass burned by flame : Mass Burned By Flame ($\mathrm{M_\odot}$) : Mass Burned By Flame
+estimated Ni56 mass : Estimated $^{56}$Ni Mass ($\mathrm{M_\odot}$) : Estimated $^{56}$Ni Mass
+ni56_nse_ratio : Ratio Of $^{56}$Ni To NSE Masses : Ratio Of $^{56}$Ni To NSE Masses
+mass with dens > 1e9 : Mass With Density $>$ $1\times 10^9 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $1\times 10^9 \mathrm{g/{cm^3}}$
+mass with dens > 3e8 : Mass With Density $>$ $3\times 10^8 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $3\times 10^8 \mathrm{g/{cm^3}}$
+mass with dens > 1e8 : Mass With Density $>$ $1\times 10^8 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $1\times 10^8 \mathrm{g/{cm^3}}$
+mass with dens > 3e7 : Mass With Density $>$ $3\times 10^7 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $3\times 10^7 \mathrm{g/{cm^3}}$  
+mass with dens > 2e7 : Mass With Density $>$ $2\times 10^7 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $2\times 10^7 \mathrm{g/{cm^3}}$ 
+mass with dens > 1.5e7 : Mass With Density $>$ $1.5\times 10^7 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $1.5\times 10^7 \mathrm{g/{cm^3}}$ 
+mass with dens > 1e7 : Mass With Density $>$ $1\times 10^7 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $1\times 10^7 \mathrm{g/{cm^3}}$
+mass with dens > 7e6 : Mass With Density $>$ $7\times 10^6 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $7\times 10^6 \mathrm{g/{cm^3}}$ 
+mass with dens > 3e6 : Mass With Density $>$ $3\times 10^6 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $3\times 10^6 \mathrm{g/{cm^3}}$
+mass with dens > 1e6 : Mass With Density $>$ $1\times 10^6 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $1\times 10^6 \mathrm{g/{cm^3}}$  
+maximum density : Maximum Density ($\mathrm{g/{cm^3}}$) : Maximum Density  
+minimum flame density : Minimum Flame Density ($\mathrm{g/{cm^3}}$) : Minimum Flame Density

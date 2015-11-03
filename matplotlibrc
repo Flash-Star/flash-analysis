@@ -3,5 +3,5 @@ font.serif         : Computer Modern Roman, Times, Palatino, New Century Schoolb
 font.sans-serif    : Computer Modern Sans serif, Helvetica, Avant Garde
 font.cursive       : Zapf Chancery
 font.monospace     : Computer Modern Typewriter, Courier
-font.size	   : 18 
+font.size	   : 20
 text.usetex        : true

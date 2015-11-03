@@ -11,6 +11,8 @@ intdataname_cone = 'ini_fin_integrals_cone.dat'
 intsini = OrderedDict([])
 intsfin = OrderedDict([])
 
+annotation_font_size = 20
+
 # get headers
 def readintfile(f,intsini,intsfin):
 	ncols = 0
@@ -157,10 +159,10 @@ mlcone_fit = mlines.Line2D([],[],color='blue',linestyle='-',linewidth=2.0,label=
 			'Slope: ' + '{0:0.4f}'.format(lopt_cone[0]) + r'$\pm$' + '{0:0.4f}'.format(lerr_cone[0]) + '\n' + 
 			'Intercept: ' + '{0:0.4f}'.format(lopt_cone[1]) + r'$\pm$' + '{0:0.4f}'.format(lerr_cone[1]))
 #mlcone_fit = mlines.Line2D([],[],color='red',linestyle='-',linewidth=2.0,label='CONE Linear Fit')
-plt.legend(handles=[mlco,mlco_fit,mlcone,mlcone_fit],loc=2,bbox_transform=plt.gcf().transFigure,prop={'size':16})
-plt.xlabel('Final Mass Burned to NSE ($M_\\odot$)')
-plt.ylabel('Estimated $^{56}$Ni Yield ($M_\\odot$)')
-plt.title('Final $^{56}$Ni and NSE Mass Trends')
+plt.legend(handles=[mlco,mlco_fit,mlcone,mlcone_fit],loc=2,borderpad=0.2, borderaxespad=0.0, handletextpad=0.0, prop={'size':annotation_font_size})
+plt.xlabel('Final Mass Burned to NSE ($\\mathrm{M_\\odot}$)')
+plt.ylabel('Estimated $^{56}$Ni Yield ($\\mathrm{M_\\odot}$)')
+#plt.title('Final $^{56}$Ni and NSE Mass Trends')
 
 plt.savefig('ni56_vs_nse_mass.pdf',bbox_inches='tight',pad_inches=0.05)
 

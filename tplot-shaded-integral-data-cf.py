@@ -14,7 +14,7 @@ import glob as glob
 # matplotlib rc parameters
 #mpl.rcParams['font.size'] = 14.0
 
-annotation_font_size = 25
+annotation_font_size = 20
 
 # Common objects 
 ifd = IntegralFlashData()
