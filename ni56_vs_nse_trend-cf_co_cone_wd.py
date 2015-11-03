@@ -11,7 +11,7 @@ intdataname_cone = 'ini_fin_integrals_cone.dat'
 intsini = OrderedDict([])
 intsfin = OrderedDict([])
 
-annotation_font_size = 20
+annotation_font_size = 18
 
 # get headers
 def readintfile(f,intsini,intsfin):
