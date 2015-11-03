@@ -62,18 +62,16 @@ ax1.add_patch(rect_cone)
 handles_cos = mlines.Line2D([],[],color='orange',alpha=0.7,
                             linestyle='-',linewidth=2.0,
                             label='CO Average ' + r'$\pm 1 \sigma$')
-handles_com = mlines.Line2D([],[],color='red',linestyle='-',linewidth=2.0,
-                            label='CO Realizations')
+handles_com = mlines.Line2D([],[],color='red',marker='o',markersize=5,linestyle='None', label='CO Realizations')
 handles_cones = mlines.Line2D([],[],color='blue',alpha=0.7,
                             linestyle='-',linewidth=2.0,
                             label='CONe Average '+r'$\pm 1 \sigma$')
-handles_conem = mlines.Line2D([],[],color='green',linestyle='-',linewidth=2.0,
-                            label='CONe Realizations')
+handles_conem = mlines.Line2D([],[],color='green',marker='D',markersize=5,linestyle='None', label='CONe Realizations')
 
 #plt.legend(handles=[mlco,mlco_fit,mlcone,mlcone_fit],loc=2,bbox_transform=plt.gcf().transFigure,prop={'size':16})
-plt.legend(handles=[handles_com,handles_cos,handles_conem,handles_cones],loc=4,borderaxespad=0.0, borderpad=0.2, handletextpad=0.0,prop={'size':16})
+plt.legend(handles=[handles_com,handles_cos,handles_conem,handles_cones],loc=4,borderaxespad=0.0, borderpad=0.125, handletextpad=0.0,prop={'size':18})
 plt.ylabel('Final IGE Yield ($\\mathrm{M_\\odot}$)')
-plt.xlabel('Mass With Density $>2 \\times 10^7 \\mathrm{g/{cm^3}}$ at time of DDT ($\\mathrm{M_\\odot}$)')
+plt.xlabel('Mass With Density $>2 \\times 10^7~ \\mathrm{g/{cm^3}}$ at time of DDT ($\\mathrm{M_\\odot}$)')
 #plt.title('Final IGE Yield vs.\ High Density Mass at DDT')
 
 #plt.show()
