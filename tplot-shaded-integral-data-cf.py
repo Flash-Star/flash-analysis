@@ -14,6 +14,8 @@ import glob as glob
 # matplotlib rc parameters
 #mpl.rcParams['font.size'] = 14.0
 
+annotation_font_size = 25
+
 # Common objects 
 ifd = IntegralFlashData()
 headers = []
@@ -26,7 +28,7 @@ which_stats = ['mean','median','min','max','std']
 this_dir = os.getcwd()
 
 ## Read in the CO integral stats
-realz_dir = '/home/dwillcox/400k/analysis/cf_brendan' # absolute path
+realz_dir = '/home/eugene/400k/analysis/cf_brendan' # absolute path
 prefix = ''
 suffix = '.dat'
 os.chdir(realz_dir)
@@ -36,7 +38,7 @@ for ws in which_stats:
 	stats_co[ws] = ifd.getArrayData()
 
 ## Read in the CONE integral stats
-cone_dir = '/home/dwillcox/400k/analysis/new-pbIgnRho-7.2/cone_integrals' #absolute path
+cone_dir = '/home/eugene/400k/analysis/new-pbIgnRho-7.2/cone_integrals' #absolute path
 os.chdir(cone_dir)
 prefix = ''
 suffix = '.dat'
@@ -148,11 +150,13 @@ for j in xrange(0,len(headers)):
 			print 'key: ' + hj
 			print 'match: ' + str(llm)
 			if llm:
-				plt.legend(handles=h,loc=loc_legend_v,prop={'size':16})
+				plt.legend(handles=h,loc=loc_legend_v,prop={'size':annotation_font_size},borderaxespad=0.0,
+                                          borderpad=0.2, handletextpad=0.0, labelspacing=0.35)
 				#plt.legend(handles=h,loc=loc_legend_v)
 				break
 			else:
-				plt.legend(handles=h,loc=4,prop={'size':16})
+				plt.legend(handles=h,loc=4,prop={'size':annotation_font_size},borderaxespad=0.0,
+                                          borderpad=0.2, handletextpad=0.0, labelspacing=0.35)
 				#plt.legend(handles=h,loc=4)
 		h_xlabel = 'time'
 		h_ylabel = hj
@@ -176,8 +180,9 @@ for j in xrange(0,len(headers)):
 			yl = hj
 	#	plt.ylabel(yl)
 		plt.ylabel(header_labels[h_ylabel])
-		#plt.title(hj + r' (DDT Density = $10^{7.2}$ $g/cc$)')
+		ax.tick_params(axis='both', which='major', pad=5)
+                #plt.title(hj + r' (DDT Density = $10^{7.2}$ $g/cc$)')
 	#	plt.title(hj)
-		plt.title(header_titles[h_title])
+# 		plt.title(header_titles[h_title])
 		plt.savefig(hs + '.pdf',bbox_inches='tight',pad_inches=0.05)
 		plt.clf()
