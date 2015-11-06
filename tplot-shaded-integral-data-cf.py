@@ -90,8 +90,8 @@ for j in xrange(0,len(headers)):
 		print len(y2)
 		print len(stats_co['mean']['time'])
                 ax.fill_between(stats_co['mean']['time'],y1,y2,
-                                where=y2>y1,interpolate=True,facecolor='blue',
-				linewidth=0.0,alpha=0.5)
+                                where=y2>y1,interpolate=True,facecolor='red',
+				linewidth=1.0,alpha=0.6)
                 # Plot CONE Range (Shaded)
                 y1 = stats_cone['min'][hj]
                 y2 = stats_cone['max'][hj]
@@ -99,11 +99,11 @@ for j in xrange(0,len(headers)):
 #		y2 = stats_cone['mean'][hj]+stats_cone['std'][hj]
                 ax.fill_between(stats_cone['mean']['time'],y1,y2,
                                 where=y2>y1,interpolate=True,facecolor='green',
-				linewidth=0.0,alpha=0.5)
+				linewidth=1.0,alpha=0.5)
                 # Plot CO Mean
                 ax.plot(stats_co['mean']['time'],stats_co['mean'][hj],color='orange',linestyle='-',linewidth=2.0)
                 # Plot CONE Mean
-                ax.plot(stats_cone['mean']['time'],stats_cone['mean'][hj],color='red',linestyle='-',linewidth=2.0)
+                ax.plot(stats_cone['mean']['time'],stats_cone['mean'][hj],color='blue',linestyle='-',linewidth=2.0)
 
 
 #                handles_rzs = mlines.Line2D([],[],color='blue',alpha=0.5,
@@ -117,7 +117,7 @@ for j in xrange(0,len(headers)):
 #                handles_conem = mlines.Line2D([],[],color='red',linestyle='-',linewidth=2.0,
 #                                            label='CONe Average')
                 
-		handles_rzs = mlines.Line2D([],[],color='blue',alpha=0.5,
+		handles_rzs = mlines.Line2D([],[],color='red',alpha=0.6,
                                             linestyle='-',linewidth=2.0,
                                             label='CO Range')
                 handles_rzm = mlines.Line2D([],[],color='orange',linestyle='-',linewidth=2.0,
@@ -125,7 +125,7 @@ for j in xrange(0,len(headers)):
                 handles_cones = mlines.Line2D([],[],color='green',alpha=0.5,
                                             linestyle='-',linewidth=2.0,
                                             label='CONe Range')
-                handles_conem = mlines.Line2D([],[],color='red',linestyle='-',linewidth=2.0,
+                handles_conem = mlines.Line2D([],[],color='blue',linestyle='-',linewidth=2.0,
                                             label='CONe Average')
                 
 		h = [handles_rzs,handles_rzm,handles_cones,handles_conem]
