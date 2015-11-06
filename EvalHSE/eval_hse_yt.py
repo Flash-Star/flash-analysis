@@ -4,6 +4,7 @@ import matplotlib
 from matplotlib import pyplot as plt
 from InterpolateDatasets import InterpolateDatasets
 from InterpolateDatasets import ElementwiseStats
+from scipy.integrate import quadrature
 import argparse
 
 ########################################################
@@ -36,23 +37,47 @@ else:
         print 'Error: --coordinates argument must be 0 or 1.'
         exit()
 
+def get_np_ray(ray_ortho,flist):
+        drays = {}
+        for f in flist:
+                drays[f] = np.array(ray_ortho[f])
+        return drays
+        
 ds_ref = yt.load(args.refdataset)
-ray_ref = ds_ref.ortho_ray(args.axis, (0.0,0.0))
-dict_ref = {interp_axis:ray_ref[interp_axis]}
+fields = ds_ref.field_list
+fields.append(interp_axis)
+dray_ref = get_np_ray(ds_ref.ortho_ray(args.axis, (0.0,0.0)),fields)
+dict_ref = {interp_axis:np.array(dray_ref[interp_axis])}
 
+integrated_residuals = {}
+for f in fields:
+        integrated_residuals[f] = 0.0
+        
 if args.cfdataset:
-        ray_cf_list = []
+        dray_cf_list = []
         for cfds in args.cfdataset:
                 ds_cf = yt.load(cfds)
-                ray_cf_list.append(ds_cf.ortho_ray(args.axis, (0.0,0.0)))
-        interpolator = InterpolateDatasets(ray_cf_list,dict_ref)
-        ray_interp_list = interpolator.get_interp_list()
-        ray_interp_list.append(ray_ref)
+                dray_cf_list.append(get_np_ray(ds_cf.ortho_ray(args.axis, (0.0,0.0)),
+                                    fields))
+        interpolator = InterpolateDatasets(dray_cf_list,dict_ref)
+        dray_interp_list = interpolator.get_interp_list()
+        dray_interp_list.append(dray_ref)
         estats = ElementwiseStats()
-        ray_cf_max = estats.cf_dicts_stat(np.maximum, ray_interp_list)
-        ray_cf_min = estats.cf_dicts_stat(np.maximum, ray_interp_list)
+        dray_cf_max = estats.cf_dicts_stat(np.maximum, dray_interp_list)
+        dray_cf_min = estats.cf_dicts_stat(np.maximum, dray_interp_list)
+
         # Get the sum of the magnitudes of upper residual and the lower residual
-        ## TODO
+        dray_residual_upper = estats.cf_dicts_stat(np.subtract, [dray_cf_max, dray_ref])
+        dray_residual_lower = estats.cf_dicts_stat(np.subtract, [dray_ref, dray_cf_min])
+        dray_residual_total = estats.cf_dicts_stat(np.add, [dray_residual_upper,
+                                                           dray_residual_lower])
 
-
-
+        # Integrate the residual in all fields to estimate the amount of fluctuation
+        integrated_residuals = {}
+        for k in fields:
+                integrated_residuals[k] = np.trapz(dray_residual_total[k],
+                                                   dict_ref[interp_axis])
+for k in fields:
+        print '-----------------------'
+        print k
+        print integrated_residuals[k]

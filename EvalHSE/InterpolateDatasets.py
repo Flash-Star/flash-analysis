@@ -47,8 +47,8 @@ class InterpolateDatasets:
 
 class ElementwiseStats:
     def cf_array_stat(stat_fun, array_list):
-        # Takes a list of same-shape numpy arrays and returns the element-wise maximum.
-        # stat_fun should be a 2-argument numpy element-wise associative comparison function.
+        # Takes a list of same-shape numpy arrays and returns the element-wise operation.
+        # stat_fun should be a 2-argument numpy element-wise associative comparison function
         # stat_fun could be, e.g. numpy.minimum, numpy.maximum, etc.n
         a_max = array_list[0]
         for a in array_list:
@@ -58,11 +58,10 @@ class ElementwiseStats:
         # Takes a list of dictionaries dict_list
         # All dictionaries d in dict_list have the same keys pointing to
         ## numpy arrays of the same shape.
-        # Returns a single dictionary with the keys of d containing the element-wise maxima.
-        # stat_fun should be a 2-argument numpy element-wise associative comparison function.
+        # Returns a single dictionary with the keys of d containing the element-wise op.
+        # stat_fun should be a 2-argument numpy element-wise associative comparison function
         # stat_fun could be, e.g. numpy.minimum, numpy.maximum, etc.
         d_max = {}
         keys = dict_list[0].keys()
         for k in keys:
             d_max[k] = self.cf_array_stat(stat_fun, [d[k] for d in dict_list])
-        
