@@ -4,19 +4,19 @@ mass : Mass ($\mathrm{M_\odot}$) : Mass
 x-momentum : Polar Radial Momentum ($\mathrm{g \\cdot cm/s}$) : Polar Radial Momentum
 y-momentum : Cylindrical Axial Momentum ($\mathrm{g \\cdot cm/s}$) : Cylindrical Axial Momentum
 z-momentum : z-momentum : z-momentum 
-E_internal+kinetic : Internal \& Kinetic Energy (erg) : Internal \& Kinetic Energy
-E_kinetic (from vel) : Kinetic Energy (erg) : Kinetic Energy
-E_internal : Internal Energy (erg) : Internal Energy  
-E_binding : Binding Energy (erg) : Binding Energy
-E_grav : Gravitational Potential Energy (erg) : Gravitational Potential Energy
-E_nuc : Nuclear Energy (erg) : Nuclear Energy
-E_neutloss : Neutrino Energy Loss (erg) : Neutrino Energy Loss
+E_internal+kinetic : Internal \& Kinetic Energy ($\mathrm{\times 10^{51}~ergs}$) : Internal \& Kinetic Energy
+E_kinetic (from vel) : Kinetic Energy ($\mathrm{\times 10^{51}~ergs}$) : Kinetic Energy
+E_internal : Internal Energy ($\mathrm{\times 10^{51}~ergs}$) : Internal Energy  
+E_binding : Binding Energy ($\mathrm{\times 10^{51}~ergs}$) : Binding Energy
+E_grav : Gravitational Potential Energy ($\mathrm{\times 10^{51}~ergs}$) : Gravitational Potential Energy
+E_nuc : Nuclear Energy ($\mathrm{\times 10^{51}~ergs}$) : Nuclear Energy
+E_neutloss : Neutrino Energy Loss ($\mathrm{\times 10^{51}~ergs}$) : Neutrino Energy Loss
 mass burned : Mass Burned ($\mathrm{M_\odot}$) : Mass Burned
 mass burned to NSQE : Mass Burned To NSQE ($\mathrm{M_\odot}$) : Mass Burned To NSQE
-mass burned to NSE : Mass Burned To NSE ($\mathrm{M_\odot}$) : Mass Burned To NSE
+mass burned to NSE : Mass Burned To IGE ($\mathrm{M_\odot}$) : Mass Burned To IGE
 mass burned by flame : Mass Burned By Flame ($\mathrm{M_\odot}$) : Mass Burned By Flame
 estimated Ni56 mass : Estimated $^{56}$Ni Mass ($\mathrm{M_\odot}$) : Estimated $^{56}$Ni Mass
-ni56_nse_ratio : Ratio Of $^{56}$Ni To NSE Masses : Ratio Of $^{56}$Ni To NSE Masses
+ni56_nse_ratio : Ratio Of $^{56}$Ni To IGE Masses : Ratio Of $^{56}$Ni To IGE Masses
 mass with dens > 1e9 : Mass With Density $>$ $1\times 10^9 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $1\times 10^9 \mathrm{g/{cm^3}}$
 mass with dens > 3e8 : Mass With Density $>$ $3\times 10^8 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $3\times 10^8 \mathrm{g/{cm^3}}$
 mass with dens > 1e8 : Mass With Density $>$ $1\times 10^8 \mathrm{g/{cm^3}}$ ($\mathrm{M_\odot}$) : Mass With Density $>$ $1\times 10^8 \mathrm{g/{cm^3}}$

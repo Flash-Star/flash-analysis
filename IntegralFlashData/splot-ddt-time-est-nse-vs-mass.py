@@ -71,7 +71,7 @@ handles_conem = mlines.Line2D([],[],color='green',marker='D',markersize=5,linest
 #plt.legend(handles=[mlco,mlco_fit,mlcone,mlcone_fit],loc=2,bbox_transform=plt.gcf().transFigure,prop={'size':16})
 plt.legend(handles=[handles_com,handles_cos,handles_conem,handles_cones],loc=4,borderaxespad=0.0, borderpad=0.125, handletextpad=0.0,prop={'size':18})
 plt.ylabel('Final IGE Yield ($\\mathrm{M_\\odot}$)')
-plt.xlabel('Mass With Density $>2 \\times 10^7~ \\mathrm{g/{cm^3}}$ at time of DDT ($\\mathrm{M_\\odot}$)')
+plt.xlabel('Mass With Density $>2 \\times 10^7~ \\mathrm{g~{cm}^{-3}}$ at time of DDT ($\\mathrm{M_\\odot}$)')
 #plt.title('Final IGE Yield vs.\ High Density Mass at DDT')
 
 #plt.show()

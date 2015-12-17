@@ -14,7 +14,7 @@ intsfin = OrderedDict([])
 annotation_font_size = 18
 
 # get headers
-def readintfile(f,intsini,intsfin):
+def readintfile(fint,intsini,intsfin,which_file):
 	ncols = 0
 	cols = []
 	gotCols = False
@@ -48,23 +48,35 @@ def readintfile(f,intsini,intsfin):
 			t_indx = cols.index('time')
 			t_fin = float(srow[t_indx])
 			if abs(t_fin-4.0)>0.1:
-				print 'Omitting horked, tfin='+str(t_fin)
-				for i in range(0,ncols):
-					intsini[cols[i]].pop()
+                                if which_file == 'co':
+				        print 'Omitting horked, tfin='+str(t_fin)
+				        for i in range(0,ncols):
+					        intsini[cols[i]].pop()
+                                elif which_file == 'cone':
+                                        print 'Including horked, tfin='+str(t_fin)
+                                        for i in range(0,ncols):
+					        intsfin[cols[i]].append(srow[i])
+
+                                else:
+                                        print 'Unknown which_file!'
+                                        exit()
 			else:
 				for i in range(0,ncols):
 					intsfin[cols[i]].append(srow[i])
+                        
+                        print 'ini len: ' + str(len(intsini['mass burned']))
+                        print 'fin len: ' + str(len(intsfin['mass burned']))
 #			for i in range(0,ncols):
 #				intsfin[cols[i]].append(srow[i])
 
 # Read the data from the integral files
 fint = open(intdataname_brendan,'r')
-readintfile(fint,intsini,intsfin)
+readintfile(fint,intsini,intsfin,'co')
 fint.close()
 nentries_brendan = len(intsini['mass burned'])
 print 'N_brendan: ' + str(nentries_brendan)
 fint = open(intdataname_cone,'r')
-readintfile(fint,intsini,intsfin)
+readintfile(fint,intsini,intsfin,'cone')
 fint.close()
 nentries_cone = len(intsini['mass burned']) - nentries_brendan
 print 'N_cone: ' + str(nentries_cone)
@@ -160,7 +172,7 @@ mlcone_fit = mlines.Line2D([],[],color='blue',linestyle='-',linewidth=2.0,label=
 			'Intercept: ' + '{0:0.4f}'.format(lopt_cone[1]) + r'$\pm$' + '{0:0.4f}'.format(lerr_cone[1]))
 #mlcone_fit = mlines.Line2D([],[],color='red',linestyle='-',linewidth=2.0,label='CONE Linear Fit')
 plt.legend(handles=[mlco,mlco_fit,mlcone,mlcone_fit],loc=2,borderpad=0.2, borderaxespad=0.0, handletextpad=0.0, prop={'size':annotation_font_size})
-plt.xlabel('Final Mass Burned to NSE ($\\mathrm{M_\\odot}$)')
+plt.xlabel('Final Mass Burned to IGE ($\\mathrm{M_\\odot}$)')
 plt.ylabel('Estimated $^{56}$Ni Yield ($\\mathrm{M_\\odot}$)')
 #plt.title('Final $^{56}$Ni and NSE Mass Trends')
 

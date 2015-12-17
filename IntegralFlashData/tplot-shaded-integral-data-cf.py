@@ -77,9 +77,14 @@ for j in xrange(0,len(headers)):
 		fig = plt.gcf()
                 ax = fig.add_axes([0.1,0.1,0.8,0.8])
 
+                if 'E_' in hj:
+                        y_scale_factor = 1.0e51
+                else:
+                        y_scale_factor = 1.0
+
                 # Plot CO Range (Shaded)
-                y1 = stats_co['min'][hj]
-                y2 = stats_co['max'][hj]
+                y1 = stats_co['min'][hj]/y_scale_factor
+                y2 = stats_co['max'][hj]/y_scale_factor
 		#y1 = stats_co['mean'][hj]-stats_co['std'][hj]
 		#y2 = stats_co['mean'][hj]+stats_co['std'][hj]
                 print y1
@@ -93,17 +98,18 @@ for j in xrange(0,len(headers)):
                                 where=y2>y1,interpolate=True,facecolor='red',
 				linewidth=1.0,alpha=0.6)
                 # Plot CONE Range (Shaded)
-                y1 = stats_cone['min'][hj]
-                y2 = stats_cone['max'][hj]
+                y1 = stats_cone['min'][hj]/y_scale_factor
+                y2 = stats_cone['max'][hj]/y_scale_factor
 #		y1 = stats_cone['mean'][hj]-stats_cone['std'][hj]
 #		y2 = stats_cone['mean'][hj]+stats_cone['std'][hj]
                 ax.fill_between(stats_cone['mean']['time'],y1,y2,
                                 where=y2>y1,interpolate=True,facecolor='green',
 				linewidth=1.0,alpha=0.5)
+                
                 # Plot CO Mean
-                ax.plot(stats_co['mean']['time'],stats_co['mean'][hj],color='orange',linestyle='-',linewidth=2.0)
+                ax.plot(stats_co['mean']['time'],stats_co['mean'][hj]/y_scale_factor,color='orange',linestyle='-',linewidth=2.0)
                 # Plot CONE Mean
-                ax.plot(stats_cone['mean']['time'],stats_cone['mean'][hj],color='blue',linestyle='-',linewidth=2.0)
+                ax.plot(stats_cone['mean']['time'],stats_cone['mean'][hj]/y_scale_factor,color='blue',linestyle='-',linewidth=2.0)
 
 
 #                handles_rzs = mlines.Line2D([],[],color='blue',alpha=0.5,
