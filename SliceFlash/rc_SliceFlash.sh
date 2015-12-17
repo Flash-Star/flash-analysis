@@ -1,3 +1,5 @@
+# For explanations of what other options are available and what they mean, run 'python SliceFlash.py --help'
+
 # Plot the density using the 'jet' colormap
 python SliceFlash.py hse_profile75_4km_hdf5_plt_cnt_0250 -o oflash_dens.eps -rd=0.0 -ru=1.5e4 -zd=-2.0e4 -zu=1.0e4 -field='dens' -cmap='jet'
 
