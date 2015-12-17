@@ -15,6 +15,12 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("dataset", type=str, 
                     help="Name of the input dataset.")
+parser.add_argument("-field", "--field", type=str, default='rgbcomp',
+                    help="Name of the dataset field or derived field to plot. To plot a RGB representation of the composition as in the hybrid paper, set this argument to 'rgbcomp'. Default is 'rgbcomp'.")
+parser.add_argument("-cmap", "--colormap", type=str, default='jet',
+                    help="Name of the matplotlib colormap to use. (If not plotting the composition). For a list of names and examples, see: http://matplotlib.org/examples/color/colormaps_reference.html")
+parser.add_argument("-cbar", "--colorbar", type=bool, default=True, help="True/False sets whether or not a colorbar is plotted (if not plotting the composition). Default is True.")
+parser.add_argument("-log", "--takelog", type=bool, default=False, help="True/False sets whether or not to plot the base-10 log of the field specified in --field (if not plotting the composition). Default is False.")
 parser.add_argument("-rd", "--r_down", type=float, 
                     help="Lower bound of radial (r) coordinate in kilometers.")
 parser.add_argument("-ru", "--r_up", type=float, 
@@ -93,21 +99,26 @@ res = (npix_z, npix_r)
 #### r_down, r_up, z_down, z_up multiplied by 1e5 to convert (km) to data units (cm)
 frb = yt.FixedResolutionBuffer(slc,(r_down*1e5, r_up*1e5, z_down*1e5, z_up*1e5),res)
 
-## Get a numpy array of shape res for each progress variable
-phfa = np.array(frb['phfa'])
-phaq = np.array(frb['phaq'])
-phqn = np.array(frb['phqn'])
+if args.field == 'rgbcomp':
+  ## Get a numpy array of shape res for each progress variable
+  phfa = np.array(frb['phfa'])
+  phaq = np.array(frb['phaq'])
+  phqn = np.array(frb['phqn'])
 
-## Create an array of shape (npix_z, npix_r, 3) with the RGB values
-## WHITE: Fuel
-## RED:   Ash
-## GREEN: QNSE
-## BLACK: NSE
-rgb = np.empty((npix_z, npix_r, 3), dtype=float)
-rgb[:,:,0] = 1.0 - phaq[:,:] # Red 
-rgb[:,:,1] = 1.0 - phfa[:,:] + phaq[:,:] - phqn[:,:] # Green 
-rgb[:,:,2] = 1.0 - phfa[:,:] # Blue
-
+  ## Create an array of shape (npix_z, npix_r, 3) with the RGB values
+  ## WHITE: Fuel
+  ## RED:   Ash
+  ## GREEN: QNSE
+  ## BLACK: NSE
+  rgb = np.empty((npix_z, npix_r, 3), dtype=float)
+  rgb[:,:,0] = 1.0 - phaq[:,:] # Red 
+  rgb[:,:,1] = 1.0 - phfa[:,:] + phaq[:,:] - phqn[:,:] # Green 
+  rgb[:,:,2] = 1.0 - phfa[:,:] # Blue
+else:
+  rgb = np.array(frb[args.field]) 
+  if args.takelog:
+    rgb = np.log10(rgb)
+  
 ## Write the plot
 #fig = plt.figure(figsize=(inches_r, inches_z), dpi=dpi)
 fig = plt.figure()
@@ -122,6 +133,7 @@ ax = fig.gca()
 ax.set_ylim(z_limits)
 ax.set_xlim(r_limits)
 ax.tick_params(axis='both', which='major', pad=5)
+ax.tick_params(direction='out')
 plt.xticks(r_tick_locations,r_tick_labels)
 plt.yticks(z_tick_locations,z_tick_labels)
 #Use km_factor to display the axis scale...
@@ -132,8 +144,11 @@ ax.set_ylabel('z $\\mathrm{(\\times 10^{' + str(z_log_km_factor) + '} ~ km)}$',l
 #### top left corner of the plot instead of the lower left corner.
 rgbud = np.flipud(rgb)
 #### Plot RGB FRB
-plt.imshow(rgbud,extent=(r_limits[0], r_limits[1], z_limits[0], z_limits[1]))
-
+imgplot = plt.imshow(rgbud,extent=(r_limits[0], r_limits[1], z_limits[0], z_limits[1]))
+if args.field != 'rgbcomp':
+  imgplot.set_cmap(args.colormap)
+  plt.colorbar()
+  
 #### Save image
 plt.savefig(args.output, bbox_inches='tight',pad_inches=0.06,dpi=dpi)
 #plt.savefig(args.output, dpi=dpi)
