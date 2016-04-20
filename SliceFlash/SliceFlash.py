@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import yt # Uses yt-3
 import matplotlib
 import numpy as np
@@ -138,7 +139,7 @@ plt.xticks(r_tick_locations,r_tick_labels)
 plt.yticks(z_tick_locations,z_tick_labels)
 #Use km_factor to display the axis scale...
 ax.set_xlabel('r $\\mathrm{(\\times 10^{' + str(r_log_km_factor) + '} ~ km)}$')
-ax.set_ylabel('z $\\mathrm{(\\times 10^{' + str(z_log_km_factor) + '} ~ km)}$',labelpad=-10)
+ax.set_ylabel('z $\\mathrm{(\\times 10^{' + str(z_log_km_factor) + '} ~ km)}$', labelpad=-5)
 
 #### Flip the FRB vertically because plt.imshow() puts pixel (0,0) at the 
 #### top left corner of the plot instead of the lower left corner.
