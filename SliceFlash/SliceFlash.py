@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import yt # Uses yt-3
 import matplotlib
 import numpy as np
@@ -18,6 +19,12 @@ parser.add_argument("dataset", type=str,
                     help="Name of the input dataset.")
 parser.add_argument("-field", "--field", type=str, default='rgbcomp',
                     help="Name of the dataset field or derived field to plot. To plot a RGB representation of the composition as in the hybrid paper, set this argument to 'rgbcomp'. Default is 'rgbcomp'.")
+parser.add_argument("-denscont", "--densitycontour", type=float,
+                    help="Value of density at which to draw a contour, superposed on the existing plot. Useful for adding to a composition map. See also --densitycontourcolor to specify its color.")
+parser.add_argument("-denscontcolor", "--densitycontourcolor", type=str, default='0099FF',
+                    help="Specify the color hex value of the density contour specified by --densitycontour. Default is 0099FF (approx. cerulean).")
+parser.add_argument("-denscontwidth", "--densitycontourwidth", type=float, default=1.0,
+                    help="Specify the linewidth of the density contour specified by --densitycontour. Default is 1.0.")
 parser.add_argument("-cmap", "--colormap", type=str, default='jet',
                     help="Name of the matplotlib colormap to use. (If not plotting the composition). For a list of names and examples, see: http://matplotlib.org/examples/color/colormaps_reference.html")
 parser.add_argument("-cbar", "--colorbar", type=bool, default=True, help="True/False sets whether or not a colorbar is plotted (if not plotting the composition). Default is True.")
@@ -119,6 +126,17 @@ else:
   rgb = np.array(frb[args.field]) 
   if args.takelog:
     rgb = np.log10(rgb)
+
+# Prep a density contour overlay in case it's desired...
+if args.densitycontour:
+  dens = np.array(frb['density'])
+  denslevel = np.array([args.densitycontour])
+  denscolor = args.densitycontourcolor.strip().lstrip('#')
+  if len(denscolor) != 6:
+    print('ERROR: density contour color must be a 6-character hex color value.')
+    exit()
+  denscolor = '#' + denscolor
+    
   
 ## Write the plot
 #fig = plt.figure(figsize=(inches_r, inches_z), dpi=dpi)
@@ -149,7 +167,17 @@ imgplot = plt.imshow(rgbud,extent=(r_limits[0], r_limits[1], z_limits[0], z_limi
 if args.field != 'rgbcomp':
   imgplot.set_cmap(args.colormap)
   plt.colorbar()
-  
+
+#### Plot density overlay if called for...
+## Flip FRB vertically because plt.imshow() puts pixel (0,0) at the
+## top left corner of the plot instead of the lower left corner
+if args.densitycontour:
+  print('Plotting density contour at {}'.format(denslevel[0]))
+  print('Min density: {}'.format(np.amin(dens)))
+  print('Max density: {}'.format(np.amax(dens)))
+  densud = np.flipud(dens)
+  plt.contour(dens, denslevel, colors=denscolor, linewidths=args.densitycontourwidth, extent=(r_limits[0], r_limits[1], z_limits[0], z_limits[1]))
+
 #### Save image
 plt.savefig(args.output, bbox_inches='tight',pad_inches=0.06,dpi=dpi)
 #plt.savefig(args.output, dpi=dpi)
