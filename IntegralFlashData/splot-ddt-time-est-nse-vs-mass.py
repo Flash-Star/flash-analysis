@@ -4,8 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 from IntegralFlashData import IntegralFlashData
 
-#intdataname_co = 'hybrid_ddt_time_detp_firsts.dat'
-intdataname_co = 'co_ddt_time_est_E_internal_firsts.dat'
+intdataname_co = 'co_ddt_time_est_E_internal_firsts_rhoddt-7.2.dat'
 intdataname_cone = 'hybrid_ddt_time_est_E_internal_firsts.dat'
 
 ifd = IntegralFlashData()
@@ -43,7 +42,8 @@ cone_average_time = np.average(cone_data['time'])
 print 'cone ave time: ' + str(cone_average_time)
 cone_std_time = np.std(cone_data['time'])
 
-
+print 'number of CO realizations: ' + str(len(co_data['final_nse_mass']))
+print 'number of CONE realizations: ' + str(len(cone_data['final_nse_mass']))
 
 plt.figure(1)
 fig = plt.gcf()

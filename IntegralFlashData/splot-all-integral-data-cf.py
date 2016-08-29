@@ -3,6 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 from CustomScatterplot import CustomScatterplot
+from matplotlib import rc
+
+rc('text', usetex=False)
 
 intdataname_brendan = 'ini_fin_integrals_brendan.dat'
 intdataname_cone = 'ini_fin_integrals_cone.dat'

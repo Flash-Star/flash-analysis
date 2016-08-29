@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 from CustomScatterplot import CustomScatterplot
 
-intdataname_brendan = 'ini_fin_integrals_brendan.dat'
+intdataname_brendan = 'ini_fin_integrals_co_rhoddt-7.2.dat'
 intdataname_cone = 'ini_fin_integrals_cone.dat'
 
 intsini = OrderedDict([])

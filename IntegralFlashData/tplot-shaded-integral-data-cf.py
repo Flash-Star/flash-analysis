@@ -28,7 +28,8 @@ which_stats = ['mean','median','min','max','std']
 this_dir = os.getcwd()
 
 ## Read in the CO integral stats
-realz_dir = '/home/eugene/400k/analysis/cf_brendan' # absolute path
+#realz_dir = '/home/eugene/400k/analysis/cf_brendan' # absolute path
+realz_dir = '/home/eugene/simulations/flash_runs/hybrid-cone/hddt/v3/profile75/ign_true/400k/analysis/cf_brendan_pbIgnRho-7.2'
 prefix = ''
 suffix = '.dat'
 os.chdir(realz_dir)

@@ -21,8 +21,10 @@ pfmt = OrderedDict([])
 this_dir = os.getcwd()
 
 ## Read in the CO integrals
-realz_dir = '/home/dwillcox/400k/analysis/cf_brendan' # absolute path
-pref = 'Realization_'
+#realz_dir = '/home/dwillcox/400k/analysis/cf_brendan' # absolute path
+realz_dir = '/home/eugene/simulations/flash_runs/hybrid-cone/hddt/v3/profile75/ign_true/400k/analysis/cf_brendan_pbIgnRho-7.2'
+#pref = 'Realization_'
+pref = '400k_Tc7e8_co_wd_R'
 suff = '_ordered.dat'
 os.chdir(realz_dir)
 
@@ -32,13 +34,14 @@ headers = []
 shortheaders = []
 rflist = glob.glob(pref + '*' + suff)
 N = len(rflist)
+print 'Found this many CO files: ' + str(N)
 
 cpick = ColorPicker()
 colors = cpick.pickColors(N)
 first = True
 for fn in rflist:
     print fn
-    ni = int(fn.lstrip(pref).rstrip(suff))
+    ni = int(fn.replace(pref,'').replace(suff,''))
     ifd.readInts(fn)
     ifd.GramsToMsun()
     ifdk = 'co_' + str(ni)
@@ -57,7 +60,7 @@ for fn in rflist:
 co_r_keys = ifdata.keys()
 
 # Read the mean now
-ifd.readInts(pref + 'mean.dat')
+ifd.readInts('mean.dat')
 ifd.GramsToMsun()
 ifdata['co_mean'] = ifd.getArrayData()
 pfmt['co_mean'] = {'color': 'orange',
@@ -70,10 +73,12 @@ ifd.clrArrayData()
 os.chdir(this_dir)
 
 ## Read in the CONE integrals
-cone_dir = '/home/dwillcox/400k/analysis/new-pbIgnRho-7.2/cone_integrals' #absolute path
+#cone_dir = '/home/dwillcox/400k/analysis/new-pbIgnRho-7.2/cone_integrals' #absolute path
+cone_dir = '/home/eugene/simulations/flash_runs/hybrid-cone/hddt/v3/profile75/ign_true/400k/analysis/new-pbIgnRho-7.2/cone_integrals'
 os.chdir(cone_dir)
 glob_pattern = 'profile75*_ordered.dat'
 cone_files = glob.glob(glob_pattern)
+print 'Found this many CONE files: ' + str(len(cone_files))
 
 n = 0
 cone_r_keys = []
@@ -93,9 +98,9 @@ for cf in cone_files:
                    'linewidth': 0.5,
                    'label': None}
 
-# Read the median file
+# Read the mean file
 ifd.clrArrayData()
-ifd.readInts('profile75_mean.dat')
+ifd.readInts('mean.dat')
 ifd.GramsToMsun()
 ifdata['cone_mean'] = ifd.getArrayData()
 pfmt['cone_mean'] = {'color': 'red',
