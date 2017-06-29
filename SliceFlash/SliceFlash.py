@@ -179,5 +179,5 @@ if args.densitycontour:
   plt.contour(dens, denslevel, colors=denscolor, linewidths=args.densitycontourwidth, extent=(r_limits[0], r_limits[1], z_limits[0], z_limits[1]))
 
 #### Save image
-plt.savefig(args.output, bbox_inches='tight',pad_inches=0.06,dpi=dpi)
+plt.savefig(args.output, bbox_inches='tight',pad_inches=0.08,dpi=dpi)
 #plt.savefig(args.output, dpi=dpi)
