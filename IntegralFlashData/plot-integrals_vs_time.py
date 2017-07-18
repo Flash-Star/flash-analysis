@@ -25,10 +25,10 @@ for hi in hs:
 	if (hi != ''):
 		cols.append(hi.strip())	
 		ncols = ncols + 1
-# prepare column data structures
+                # prepare column data structures
 for c in cols:
 	ints[c] = []
-# read data points
+        # read data points
 for l in fint:
 	if l=='# simulation restarted\n':
 		continue
@@ -42,7 +42,7 @@ fint.close()
 data = OrderedDict([])
 for k in ints.keys():
         v = ints[k]
-	data[k] = np.array([float(s) for s in v])
+        data[k] = np.array([float(s) for s in v])
 
 # Reorganize so leg N data overwrite data from leg N-1
 data_o = OrderedDict([])
