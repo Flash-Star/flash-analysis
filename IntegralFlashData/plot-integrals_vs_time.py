@@ -65,32 +65,32 @@ for k in data.keys():
 
 for k in data_o.keys():
         v = data_o[k]
-	data[k] = np.array(v) # now data contains the reorganized integral qtys
+        data[k] = np.array(v) # now data contains the reorganized integral qtys
 
 # Put masses in units of Msun
 gpermsun = 1.988435e33 # grams/Msun
 for k in data.keys():
         v = data[k]
-	if k.find('mass')!=-1:
-		data[k] = v/gpermsun
+        if k.find('mass')!=-1:
+	        data[k] = v/gpermsun
 
 
 # Plot all variables vs. time
 nplot = 1
 for k in data.keys():
         v = data[k]
-	if k!='time':
-		plt.figure(nplot)
-		fig = plt.gcf()
-		ax = fig.add_axes([0.1,0.1,0.8,0.8])
-		ax.plot(data['time'],data[k])
-		plt.xlabel('time (s)')
-		plt.ylabel(k)
-		plt.title(k + ' vs. Time')
-		pp = PdfPages(k.replace(' > ','>').replace(' < ','<').replace(' ','_') + '.pdf')
-		pp.savefig()
-		pp.close()
-		nplot += 1
+        if k!='time':
+	        plt.figure(nplot)
+                fig = plt.gcf()
+                ax = fig.add_axes([0.1,0.1,0.8,0.8])
+                ax.plot(data['time'],data[k])
+                plt.xlabel('time (s)')
+                plt.ylabel(k)
+                plt.title(k + ' vs. Time')
+                pp = PdfPages(k.replace(' > ','>').replace(' < ','<').replace(' ','_') + '.pdf')
+                pp.savefig()
+                pp.close()
+                nplot += 1
 
 #plt.figure(1)
 #fig = plt.gcf()
