@@ -40,7 +40,8 @@ fint.close()
 
 # Convert strings to numbers
 data = OrderedDict([])
-for k,v in ints.iteritems():
+for k in ints.keys():
+        v = ints[k]
 	data[k] = np.array([float(s) for s in v])
 
 # Reorganize so leg N data overwrite data from leg N-1
@@ -62,19 +63,22 @@ for i in xrange(0,len(data['time'])-1):
 for k in data.keys():
 	data_o[k].append(data[k][-1]) 
 
-for k,v in data_o.iteritems():
+for k in data_o.keys():
+        v = data_o[k]
 	data[k] = np.array(v) # now data contains the reorganized integral qtys
 
 # Put masses in units of Msun
 gpermsun = 1.988435e33 # grams/Msun
-for k,v in data.iteritems():
+for k in data.keys():
+        v = data[k]
 	if k.find('mass')!=-1:
 		data[k] = v/gpermsun
 
 
 # Plot all variables vs. time
 nplot = 1
-for k,v in data.iteritems():
+for k in data.keys():
+        v = data[k]
 	if k!='time':
 		plt.figure(nplot)
 		fig = plt.gcf()
