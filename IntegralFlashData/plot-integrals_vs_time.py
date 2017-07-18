@@ -2,8 +2,13 @@ from collections import OrderedDict
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
+import argparse
 
-intdataname = 'profile75_mpole-2_r-35e6_a-3e5.dat'
+parser = argparse.ArgumentParser()
+parser.add_argument('infile', type=str, help='Name of input integral file to plot.')
+args = parser.parse_args()
+
+intdataname = args.infile
 
 ints = OrderedDict([])
 ncols = 0
