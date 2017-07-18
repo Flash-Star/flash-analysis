@@ -49,7 +49,7 @@ data_o = OrderedDict([])
 for k in ints.keys():
 	data_o[k] = []
 
-for i in xrange(0,len(data['time'])-1):
+for i in range(0,len(data['time'])-1):
 	# determine if this time is later than any future time, if so, ignore
 	later = False
 	for t in data['time'][i+1:]:
