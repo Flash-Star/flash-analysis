@@ -80,7 +80,7 @@ nplot = 1
 for k in data.keys():
         v = data[k]
         if k!='time':
-	        plt.figure(nplot)
+                plt.figure(nplot)
                 fig = plt.gcf()
                 ax = fig.add_axes([0.1,0.1,0.8,0.8])
                 ax.plot(data['time'],data[k])
