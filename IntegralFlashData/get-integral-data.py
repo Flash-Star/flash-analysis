@@ -16,9 +16,12 @@ gotCols = False
 ncols = 0
 cols = []
 
+prefix = 'profile75'
+suffix = '_ordered.dat'
+
 for (path,dirs,files) in os.walk(loc):
 	for f in files:
-		if (f[0:9]=='profile75' and f[-4:]=='.dat'):
+		if (f[0:len(prefix)]==prefix and f[-len(suffix):]==suffix):
 			# Read the data from this integral file
 			fint = open(path + '/' + f,'r')
 			# get data from file name

@@ -22,5 +22,9 @@ for i in xrange(0,len(pbir)):
     iname = pref + p + suff
     ifd.readInts(iname)
     ifd.orderData()
+    # Compute the binding energy and add it to the integrals
+    data = ifd.getArrayData()
+    data['E_binding'] = data['E_internal+kinetic'] + data['E_grav']
+    ifd.data = data
     ifd.saveOrderedData()
     ifd.clrArrayData()
