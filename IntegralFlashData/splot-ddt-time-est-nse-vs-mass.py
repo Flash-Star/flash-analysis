@@ -1,3 +1,4 @@
+from __future__ import print_function
 from collections import OrderedDict
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,31 +20,49 @@ ifd.clrArrayData()
 
 # Get averages and standard deviations for the plot
 co_average_mass = np.average(co_data['mass with dens > 2e7'])
-print 'co ave mass: ' + str(co_average_mass)
+print('co ave mass: ' + str(co_average_mass))
 co_std_mass = np.std(co_data['mass with dens > 2e7'])
+print('co std mass: ' + str(co_std_mass))
+
+print('\n---------------------------------\n')
 
 cone_average_mass = np.average(cone_data['mass with dens > 2e7'])
-print 'cone ave mass: ' + str(cone_average_mass)
+print('cone ave mass: ' + str(cone_average_mass))
 cone_std_mass = np.std(cone_data['mass with dens > 2e7'])
+print('cone std mass: ' + str(cone_std_mass))
+
+print('\n---------------------------------\n')
 
 co_average_nse = np.average(co_data['final_nse_mass'])
-print 'co ave nse: ' + str(co_average_nse)
+print('co ave nse: ' + str(co_average_nse))
 co_std_nse = np.std(co_data['final_nse_mass'])
+print('co std nse: ' + str(co_std_nse))
+
+print('\n---------------------------------\n')
 
 cone_average_nse = np.average(cone_data['final_nse_mass'])
-print 'cone ave nse: ' + str(cone_average_nse)
+print('cone ave nse: ' + str(cone_average_nse))
 cone_std_nse = np.std(cone_data['final_nse_mass'])
+print('cone std nse: ' + str(cone_std_nse))
+
+print('\n---------------------------------\n')
 
 co_average_time = np.average(co_data['time'])
-print 'co ave time: ' + str(co_average_time)
+print('co ave time: ' + str(co_average_time))
 co_std_time = np.std(co_data['time'])
+print('co std time: ' + str(co_std_time))
+
+print('\n---------------------------------\n')
 
 cone_average_time = np.average(cone_data['time'])
-print 'cone ave time: ' + str(cone_average_time)
+print('cone ave time: ' + str(cone_average_time))
 cone_std_time = np.std(cone_data['time'])
+print('cone std time: ' + str(cone_std_time))
 
-print 'number of CO realizations: ' + str(len(co_data['final_nse_mass']))
-print 'number of CONE realizations: ' + str(len(cone_data['final_nse_mass']))
+print('\n---------------------------------\n')
+
+print('number of CO realizations: ' + str(len(co_data['final_nse_mass'])))
+print('number of CONE realizations: ' + str(len(cone_data['final_nse_mass'])))
 
 plt.figure(1)
 fig = plt.gcf()

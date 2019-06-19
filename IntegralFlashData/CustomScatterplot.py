@@ -18,12 +18,12 @@ class CustomScatterplot:
 		# in pfmt['color'], pfmt['marker'], and pfmt['linestyle'], etc.
 		## Get the number of points to use
 		npts = 0
-		for k,v in data.iteritems():
+		for k,v in data.items():
 			npts = len(v)
 			break
-		for i in xrange(0,npts):
+		for i in range(0,npts):
 			fargs = {}
-			for k,v in pfmt.iteritems():
+			for k,v in pfmt.items():
 				fargs[k] = v[i]
 			self.ax1.plot(data[xaxis][i],data[yaxis][i],**fargs)
 	def getfig(self):

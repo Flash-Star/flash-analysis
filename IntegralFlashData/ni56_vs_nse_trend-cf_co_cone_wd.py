@@ -1,3 +1,4 @@
+from __future__ import print_function
 from collections import OrderedDict
 import numpy as np
 from scipy.optimize import curve_fit
@@ -15,57 +16,55 @@ annotation_font_size = 18
 
 # get headers
 def readintfile(fint,intsini,intsfin,which_file):
-	ncols = 0
-	cols = []
-	gotCols = False
-	while (True):
-		l = fint.readline()
-		if not l:
-			break
-		if (l=='----------\n'):
-			h = fint.readline()
-			if (not gotCols):
-				ncols = 0
-				hs = h.rstrip('\n').split('  ')
-				for hi in hs:
-					if (hi != ''):
-						cols.append(hi)	
-						ncols = ncols + 1
+        ncols = 0
+        cols = []
+        gotCols = False
+        while (True):
+                l = fint.readline()
+                if not l:
+                        break
+                if (l=='----------\n'):
+                        h = fint.readline()
+                        if (not gotCols):
+                                ncols = 0
+                                hs = h.rstrip('\n').split('  ')
+                                for hi in hs:
+                                        if (hi != ''):
+                                                cols.append(hi)	
+                                                ncols = ncols + 1
 				# prepare column data structures
-				for c in cols:
-					if not c in intsini:
-						intsini[c] = []
-					if not c in intsfin:
-						intsfin[c] = []
-				gotCols = True
+                                for c in cols:
+                                        if not c in intsini:
+                                                intsini[c] = []
+                                        if not c in intsfin:
+                                                intsfin[c] = []
+                                gotCols = True
 			# read first and last data point
-			row = fint.readline()
-			srow = row.split()
-			for i in range(0,ncols):
-				intsini[cols[i]].append(srow[i])
-			row = fint.readline()
-			srow = row.split()
-			t_indx = cols.index('time')
-			t_fin = float(srow[t_indx])
-			if abs(t_fin-4.0)>0.1:
+                        row = fint.readline()
+                        srow = row.split()
+                        for i in range(0,ncols):
+                                intsini[cols[i]].append(srow[i])
+                        row = fint.readline()
+                        srow = row.split()
+                        t_indx = cols.index('time')
+                        t_fin = float(srow[t_indx])
+                        if abs(t_fin-4.0)>0.1:
                                 if which_file == 'co':
-				        print 'Omitting horked, tfin='+str(t_fin)
-				        for i in range(0,ncols):
-					        intsini[cols[i]].pop()
-                                elif which_file == 'cone':
-                                        print 'Including horked, tfin='+str(t_fin)
+                                        print('Omitting horked, tfin='+str(t_fin))
                                         for i in range(0,ncols):
-					        intsfin[cols[i]].append(srow[i])
-
+                                                intsini[cols[i]].pop()
+                                elif which_file == 'cone':
+                                        print('Including horked, tfin='+str(t_fin))
+                                        for i in range(0,ncols):
+                                                intsfin[cols[i]].append(srow[i])
                                 else:
-                                        print 'Unknown which_file!'
+                                        print('Unknown which_file!')
                                         exit()
-			else:
-				for i in range(0,ncols):
-					intsfin[cols[i]].append(srow[i])
-                        
-                        print 'ini len: ' + str(len(intsini['mass burned']))
-                        print 'fin len: ' + str(len(intsfin['mass burned']))
+                        else:
+                                for i in range(0,ncols):
+                                        intsfin[cols[i]].append(srow[i])
+                        print('ini len: ' + str(len(intsini['mass burned'])))
+                        print('fin len: ' + str(len(intsfin['mass burned'])))
 #			for i in range(0,ncols):
 #				intsfin[cols[i]].append(srow[i])
 
@@ -74,12 +73,12 @@ fint = open(intdataname_brendan,'r')
 readintfile(fint,intsini,intsfin,'co')
 fint.close()
 nentries_brendan = len(intsini['mass burned'])
-print 'N_brendan: ' + str(nentries_brendan)
+print('N_brendan: ' + str(nentries_brendan))
 fint = open(intdataname_cone,'r')
 readintfile(fint,intsini,intsfin,'cone')
 fint.close()
 nentries_cone = len(intsini['mass burned']) - nentries_brendan
-print 'N_cone: ' + str(nentries_cone)
+print('N_cone: ' + str(nentries_cone))
 
 # Reorganize the data into a single dictionary for plotting ease
 # Convert strings to numbers
@@ -97,9 +96,9 @@ data['finMassNSE'] = data['finMassNSE']/gpermsun
 
 # Enforce the above in a plot format dictionary corresponding to data
 pltfmt = OrderedDict([])
-pltfmt['color'] = ['red' for i in xrange(0,nentries_brendan)]+['green' for i in xrange(0,nentries_cone)]
-pltfmt['marker'] = ['o' for i in xrange(0,nentries_brendan)]+['D' for i in xrange(0,nentries_cone)]
-pltfmt['linestyle'] = ['None' for i in xrange(0,nentries_brendan+nentries_cone)]
+pltfmt['color'] = ['red' for i in range(0,nentries_brendan)]+['green' for i in range(0,nentries_cone)]
+pltfmt['marker'] = ['o' for i in range(0,nentries_brendan)]+['D' for i in range(0,nentries_cone)]
+pltfmt['linestyle'] = ['None' for i in range(0,nentries_brendan+nentries_cone)]
 
 # Fit lines through final kinetic energy and Ni-56 for all cases
 def linearfun(x,m,b):
@@ -107,8 +106,8 @@ def linearfun(x,m,b):
 
 # to do the fits properly, I have to order the data points...
 ntotal = len(data['finEkinetic'])
-co_nse_ni = [(data['finMassNSE'][i],data['finMassNi56'][i]) for i in xrange(0,nentries_brendan)]
-cone_nse_ni = [(data['finMassNSE'][i],data['finMassNi56'][i]) for i in xrange(nentries_brendan,ntotal)]
+co_nse_ni = [(data['finMassNSE'][i],data['finMassNi56'][i]) for i in range(0,nentries_brendan)]
+cone_nse_ni = [(data['finMassNSE'][i],data['finMassNi56'][i]) for i in range(nentries_brendan,ntotal)]
 
 co_nse_ni_s = sorted(co_nse_ni,key=lambda x: x[0])
 cone_nse_ni_s = sorted(cone_nse_ni,key=lambda x: x[0])
@@ -129,10 +128,10 @@ cone_fit_nse = np.linspace(min(cone_nse),max(cone_nse),100)
 cone_fit_ni = cone_fit_nse*lopt_cone[0]+lopt_cone[1]
 
 
-print '____________________________'
-print 'Final Ni-56 = M_NSE*m + b: '
-print '* CO: m = ' + str(lopt_co[0]) + ', b = ' + str(lopt_co[1])
-print '* CONe: m = ' + str(lopt_cone[0]) + ', b = ' + str(lopt_cone[1])
+print('____________________________')
+print('Final Ni-56 = M_NSE*m + b: ')
+print('* CO: m = ' + str(lopt_co[0]) + ', b = ' + str(lopt_co[1]))
+print('* CONe: m = ' + str(lopt_cone[0]) + ', b = ' + str(lopt_cone[1]))
 
 # Plot final NSE mass vs. initial burned mass for all cases
 #plt.figure(1)

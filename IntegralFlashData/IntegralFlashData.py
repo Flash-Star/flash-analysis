@@ -2,15 +2,15 @@ from collections import OrderedDict
 import numpy as np
 
 class IntegralFlashData:
-	def __init__(self):
-		ifilename = ''
-		data = OrderedDict([])
+        def __init__(self):
+                ifilename = ''
+                data = OrderedDict([])
 	
-	def readInts(self,ifname,convert_g_to_msun = False):
-		self.clrArrayData()
-		self.data = OrderedDict([])
-		self.ifilename = ifname
-		self.ifile = open(self.ifilename,'r')
+        def readInts(self,ifname,convert_g_to_msun = False):
+                self.clrArrayData()
+                self.data = OrderedDict([])
+                self.ifilename = ifname
+                self.ifile = open(self.ifilename,'r')
 
                 data_str = OrderedDict([])
 
@@ -39,12 +39,12 @@ class IntegralFlashData:
 
                 # Convert strings to numbers
                 self.data = OrderedDict([])
-                for k,v in data_str.iteritems():
+                for k,v in data_str.items():
                         self.data[k] = np.array([float(s) for s in v])
 		
 		# Convert grams to Msun if needed
-		if convert_g_to_msun:
-			self.GramsToMsun()
+                if convert_g_to_msun:
+                        self.GramsToMsun()
                         
         def orderData(self):
                 # Reorganize so leg N data overwrite data from leg N-1
@@ -66,7 +66,7 @@ class IntegralFlashData:
                 for k in self.data.keys():
                         data_o[k].append(self.data[k][-1])
                         
-                for k,v in data_o.iteritems():
+                for k,v in data_o.items():
                         self.data[k] = np.array(v) # now data contains the ordered values
 
         def saveOrderedData(self,ofname=''):
@@ -80,7 +80,7 @@ class IntegralFlashData:
                         #        base = base.rstrip('.')
                         #else:
                         #        base = basel[0]
-			base = self.ifilename.rstrip('.dat')
+                        base = self.ifilename.rstrip('.dat')
                         ofname = base + '_ordered.dat'
                 # Now open the output file and write the ordered data
                 of = open(ofname,'w')
@@ -100,17 +100,15 @@ class IntegralFlashData:
         def GramsToMsun(self):
                 self.data = self.getArrayData()
                 gpermsun = 1.988435e33 # grams/Msun
-                for k,v in self.data.iteritems():
+                for k,v in self.data.items():
                         if (k.find('mass')!=-1):
                                 self.data[k] = v/gpermsun
 
-	def getArrayData(self):
-		a = OrderedDict([])
-		for k,v in self.data.iteritems():
-			a[k] = np.array(v)
-		return a
+        def getArrayData(self):
+                a = OrderedDict([])
+                for k,v in self.data.items():
+                        a[k] = np.array(v)
+                return a
 
         def clrArrayData(self):
                 self.data = OrderedDict([])
-
-	
